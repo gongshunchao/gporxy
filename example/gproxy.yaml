@@ -1,0 +1,19 @@
+control:
+  socket: /tmp/gproxy.sock
+  udp_session_idle_timeout: 30s
+
+rules:
+  - name: tcp-web
+    protocol: tcp
+    listen: 0.0.0.0:8080
+    target: 127.0.0.1:80
+
+  - name: udp-range-fan-in
+    protocol: udp
+    listen: 0.0.0.0:30000-30010
+    target: 127.0.0.1:40000
+
+  - name: tcp-range-pair
+    protocol: tcp
+    listen: 0.0.0.0:10000-10002
+    target: 127.0.0.1:20000-20002
